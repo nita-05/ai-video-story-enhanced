@@ -11,7 +11,6 @@ const Modal = ({
   showCloseButton = true,
   closeOnOverlayClick = true 
 }) => {
-  // Close modal on Escape key
   useEffect(() => {
     const handleEscape = (e) => {
       if (e.key === 'Escape') {
@@ -21,7 +20,6 @@ const Modal = ({
 
     if (isOpen) {
       document.addEventListener('keydown', handleEscape);
-      // Prevent body scroll when modal is open
       document.body.style.overflow = 'hidden';
     }
 
@@ -36,7 +34,7 @@ const Modal = ({
     md: 'max-w-2xl',
     lg: 'max-w-4xl',
     xl: 'max-w-6xl',
-    full: 'max-w-full mx-4'
+    full: 'max-w-[95vw] mx-4'
   };
 
   const handleOverlayClick = (e) => {
@@ -52,33 +50,35 @@ const Modal = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md"
           onClick={handleOverlayClick}
         >
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            initial={{ opacity: 0, scale: 0.9, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className={`w-full ${sizeClasses[size]} bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden`}
+            exit={{ opacity: 0, scale: 0.9, y: 30 }}
+            transition={{ type: "spring", damping: 30, stiffness: 400 }}
+            className={`w-full ${sizeClasses[size]} bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 overflow-hidden`}
           >
-            {/* Header */}
+            {/* Enhanced Header */}
             {title && (
-              <div className="flex items-center justify-between p-6 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-white">
-                <h2 className="text-xl font-bold text-gray-900">{title}</h2>
+              <div className="flex items-center justify-between p-8 border-b border-gray-200/50 bg-gradient-to-r from-blue-50/50 via-white/50 to-indigo-50/50 backdrop-blur-sm">
+                <h2 className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-blue-800 bg-clip-text text-transparent">{title}</h2>
                 {showCloseButton && (
-                  <button
+                  <motion.button
                     onClick={onClose}
-                    className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                    className="p-3 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-xl transition-all duration-300 hover:scale-110"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
                   >
                     <X className="w-5 h-5" />
-                  </button>
+                  </motion.button>
                 )}
               </div>
             )}
 
-            {/* Content */}
-            <div className="p-6 max-h-[80vh] overflow-y-auto">
+            {/* Enhanced Content */}
+            <div className="p-8 max-h-[80vh] overflow-y-auto">
               {children}
             </div>
           </motion.div>
