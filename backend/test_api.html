@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Test</title>
+</head>
+<body>
+    <h1>API Test</h1>
+    <button onclick="testProcess()">Test Process</button>
+    <button onclick="testResults()">Test Results</button>
+    <div id="output"></div>
+
+    <script>
+        const videoId = 'a62b882f-179e-4e95-987b-7daca4d15df9';
+        
+        async function testProcess() {
+            try {
+                const response = await fetch(`/process/${videoId}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                const data = await response.json();
+                document.getElementById('output').innerHTML = `<pre>Process: ${JSON.stringify(data, null, 2)}</pre>`;
+            } catch (error) {
+                document.getElementById('output').innerHTML = `<pre>Error: ${error.message}</pre>`;
+            }
+        }
+        
+        async function testResults() {
+            try {
+                const response = await fetch(`/results/${videoId}`);
+                const data = await response.json();
+                document.getElementById('output').innerHTML = `<pre>Results: ${JSON.stringify(data, null, 2)}</pre>`;
+            } catch (error) {
+                document.getElementById('output').innerHTML = `<pre>Error: ${error.message}</pre>`;
+            }
+        }
+    </script>
+</body>
+</html>

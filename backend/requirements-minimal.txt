@@ -1,0 +1,12 @@
+# Minimal requirements that work with Python 3.13
+# Core functionality only - no heavy AI dependencies
+
+flask>=3.0.0
+flask-cors>=4.0.0
+pymongo>=4.6.0
+python-dotenv>=1.0.0
+numpy>=1.26.0
+Pillow>=10.2.0
+ffmpeg-python>=0.2.0
+vosk>=0.3.45
+google-generativeai>=0.8.0
